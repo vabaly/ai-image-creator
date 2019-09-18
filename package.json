@@ -1,0 +1,46 @@
+{
+  "name": "ai-image-creator",
+  "version": "1.0.0",
+  "description": "用于在对象识别中通过一张图片创建出多张图片的工具",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.code.oa.com/erwinliu/lego-ai-image-creator.git"
+  },
+  "bin": {
+    "aiimg": "lib/command.js"
+  },
+  "author": "erwinliu",
+  "license": "ISC",
+  "keywords": [
+    "image",
+    "lego",
+    "ai"
+  ],
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/commander": "^2.12.2",
+    "@types/gm": "^1.18.4",
+    "@types/node": "^12.7.5",
+    "@types/sharp": "^0.22.2",
+    "@types/shelljs": "^0.8.5",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-ivweb": "^0.1.5",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.1",
+    "gm": "^1.23.1",
+    "sharp": "^0.23.0",
+    "shelljs": "^0.8.3"
+  }
+}
