@@ -74,7 +74,7 @@ start(input, output);
 
 ## 贡献
 
-欢迎大家提 [ISSUE](https://github.com/vabaly/image-creator/issues/new) 帮助改进问题，或者提交 `PR` 来帮助改进和新增功能。
+欢迎大家提 [ISSUE](https://github.com/vabaly/ai-image-creator/issues/new) 帮助改进问题，或者提交 `PR` 来帮助改进和新增功能。
 
 ## 许可证
 
