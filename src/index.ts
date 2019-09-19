@@ -10,7 +10,7 @@ import {
     OUTPUT
 } from './config';
 import {
-    processFile, setOutputDir
+    processFile, setOutputDir, processImage
 } from './process';
 import { walk } from './walk';
 import {
@@ -28,7 +28,16 @@ export async function start(input: string, output: string): Promise<void> {
 
     setOutputDir(outputDir);
 
-    await walk(inputDir, processFile);
+    const stat = fs.statSync(inputDir);
+    // 如果是文件，则只对文件做处理
+    if (stat.isFile) {
+        await processFile({
+            path: inputDir,
+            name: path.basename(inputDir)
+        });
+    } else {
+        await walk(inputDir, processFile);
+    }
 
     logSuccess('任务成功');
 }

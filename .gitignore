@@ -2,3 +2,4 @@ node_modules
 temp
 lib
 .DS_Store
+output
