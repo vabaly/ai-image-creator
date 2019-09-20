@@ -56,6 +56,13 @@ AI Image Creator 可以用过命令行的方式调用。如果是安装在全局
 
 * `-i --input <path>`， `path` 为源图片路径或者包含源图片的目录路径，默认是当前目录。
 * `-o --output <path>`， `path` 为生成的图片目录路径，默认是当前目录下的 `output` 文件夹。
+* `--output <paths>`，`paths` 为遍历时忽略的文件夹或文件名，多个文件或文件夹名用 `,` 分隔，暂时不支持 Glob 匹配。
+
+例如，下面的命令就是将 `images` 目录下除去 `dog` 和 `cat` 两个目录的所有图片都生成出衍生图片至 `outputs` 文件夹：
+
+```
+aiimg -i images/ -o outputs --ignore images/dog,images/cat
+```
 
 ### Node API
 
@@ -66,11 +73,18 @@ import { start } from 'ai-image-creator'
 
 /**
  * @param {string} input 源图片路径或者包含源图片的目录路径，默认是当前目录
- * @param {string} output 生成的图片目录路径，默认是当前目录下的 output 文件夹。
+ * @param {string} output 生成的图片目录路径，默认是当前目录下的 output 文件夹
+ * @param {object} options 参数配置
+ * @param {string|string[]} options.ignore 遍历时忽略的文件夹或文件名，暂时不支持 Glob 匹配
  * @return {Promise} 生成完毕后会返回一个 Promise
  */
-start(input, output);
+start(input, output, options);
 ```
+
+## Todo
+
+- [ ] 支持 Glob 忽略模式
+- [ ] 支持自定义调节生成图片的配置
 
 ## 贡献
 
