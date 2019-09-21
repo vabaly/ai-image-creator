@@ -20,6 +20,7 @@ jobs:
 
         # 运行步骤
         steps:
+        - uses: actions/checkout@master
         - run: |
             npm i
             npm run test
