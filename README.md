@@ -2,6 +2,8 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
+[![workflow badge](https://github.com/vabaly/ai-image-creator/workflows/continuous-integration-workflow/badge.svg)](https://github.com/vabaly/ai-image-creator)
+
 AI Image Creator 是一款可以将 1 张图片一键生成 40+ 张衍生图片的工具，它也可以深度遍历一个文件夹，将里面的所有图片都产生 40+ 张衍生图片，从而达到对一个图库扩充 40+ 倍的效果。
 
 ## 目录
