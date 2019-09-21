@@ -14,8 +14,9 @@ jobs:
 
         # 构建矩阵，让任务在以下平台和 Node 版本中都跑一遍
         strategy:
-            os: [ubuntu-latest, windows-latest, macOS-latest]
-            node: [6, 8, 10]
+            matrix:
+                os: [ubuntu-latest, windows-latest, macOS-latest]
+                node: [6, 8, 10]
 
         # 运行步骤
         steps:
