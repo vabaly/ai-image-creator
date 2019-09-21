@@ -1,0 +1,24 @@
+# 持续集成工作流
+# 语法：https://help.github.com/cn/articles/workflow-syntax-for-github-actions
+
+name: continuous-integration-workflow
+
+on: push
+
+# 任务
+jobs:
+    test:
+        name: test
+        # 运行环境
+        runs-on: ${{ matrix.os }}
+
+        # 构建矩阵，让任务在以下平台和 Node 版本中都跑一遍
+        strategy:
+            os: [ubuntu-latest, windows-latest, macOS-latest]
+            node: [6, 8, 10]
+
+        # 运行步骤
+        steps:
+        - run: |
+            npm i
+            npm run test
