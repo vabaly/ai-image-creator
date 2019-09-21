@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "tsc",
     "start": "tsc",
-    "test": "jest"
+    "test": "jest -i"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^8.0.0",
     "@types/gm": "^1.18.4",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
     "@types/shelljs": "^0.8.5",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
@@ -34,8 +36,12 @@
     "cross-env": "^6.0.0",
     "eslint": "^6.4.0",
     "eslint-config-ivweb": "^0.1.5",
+    "fs-extra": "^8.1.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "memfs": "^2.15.5"
   },
   "dependencies": {
     "chalk": "^2.4.2",
