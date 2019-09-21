@@ -2,14 +2,7 @@
 
 import program from 'commander';
 import { start } from './index';
-
-/**
- * 将字符串中的多个值转变为一个数组
- * @param value 一串地址，地址与地址之间用 , 分隔
- */
-function commaSeparatedList(value: string): string[] {
-    return value.split(',');
-}
+import { commaSeparatedList } from './util';
 
 program
     .option('-i --input <path>', '输入要转换的图片父目录')
