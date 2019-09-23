@@ -1,7 +1,7 @@
 # 持续集成工作流
 # 语法：https://help.github.com/cn/articles/workflow-syntax-for-github-actions
 
-name: continuous-integration-workflow
+name: build
 
 on: push
 
