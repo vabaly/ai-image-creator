@@ -35,7 +35,7 @@ Windows 系统可以前往 [官网下载页面](http://www.graphicsmagick.org/do
 AI Image Creator 可以通过 [npm](https://www.npmjs.com/) 全局安装：
 
 ```sh
-npm i image-creator -g
+npm i ai-image-creator -g
 ```
 
 ### 本地安装
@@ -43,7 +43,7 @@ npm i image-creator -g
 AI Image Creator 也可以通过 [npm](https://www.npmjs.com/) 安装在项目内：
 
 ```sh
-npm i image-creator -S
+npm i ai-image-creator -S
 ```
 
 ## 使用
