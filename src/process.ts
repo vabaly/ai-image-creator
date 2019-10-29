@@ -3,6 +3,7 @@
  */
 import path from 'path';
 import gm from 'gm';
+import { pictureToXML } from 'picture-to-xml';
 import { OUTPUT } from './config';
 import { getCount } from './util';
 import { logError } from './log';
@@ -50,6 +51,24 @@ function getOutputPath(output: Output): string {
 }
 
 /**
+ * 图像生成 XML 文件
+ * @param outputPath 图像输出的地址
+ */
+function generateXML(outputPath: string): Promise<void> {
+    const pathObject = path.parse(outputPath);
+    const componentName = 'demo';
+    const filename = pathObject.name;
+    const XMLOutputPath = path.join(pathObject.dir, filename + '.xml');
+
+    // 同时生成一份图片对应的 XML
+    return pictureToXML(
+        outputPath,
+        componentName,
+        XMLOutputPath
+    );
+}
+
+/**
  * 通用的处理函数
  * @param resolve 成功决议
  * @param reject 失败决议
@@ -79,10 +98,12 @@ export function rotate(input: ImageInput): Promise<any> {
         gm(path)
             .rotate('white', 90)
             .write(outputPath, handle(resolve, reject));
-    }).catch((error: Error): boolean => {
-        logError(`旋转图片 ${path} 时发生错误`, error.message);
-        return false;
-    });
+    })
+        .then(() => generateXML(outputPath))
+        .catch((error: Error): boolean => {
+            logError(`旋转图片 ${path} 时发生错误`, error.message);
+            return false;
+        });
 }
 
 /**
@@ -98,10 +119,12 @@ export function flip(input: ImageInput): Promise<any> {
         gm(path)
             .flip()
             .write(outputPath, handle(resolve, reject));
-    }).catch((error: Error): boolean => {
-        logError(`沿 Y 轴翻转图片 ${path} 时发生错误`, error.message);
-        return false;
-    });
+    })
+        .then(() => generateXML(outputPath))
+        .catch((error: Error): boolean => {
+            logError(`沿 Y 轴翻转图片 ${path} 时发生错误`, error.message);
+            return false;
+        });
 }
 
 /**
@@ -116,10 +139,12 @@ export function flop(input: ImageInput): Promise<any> {
         gm(path)
             .flop()
             .write(outputPath, handle(resolve, reject));
-    }).catch((error: Error): boolean => {
-        logError(`沿 X 轴翻转图片 ${path} 时发生错误`, error.message);
-        return false;
-    });
+    })
+        .then(() => generateXML(outputPath))
+        .catch((error: Error): boolean => {
+            logError(`沿 X 轴翻转图片 ${path} 时发生错误`, error.message);
+            return false;
+        });
 }
 
 /**
@@ -135,10 +160,12 @@ export function flipAndFlop(input: ImageInput): Promise<any> {
             .flip()
             .flop()
             .write(outputPath, handle(resolve, reject));
-    }).catch((error: Error): boolean => {
-        logError(`沿对角线翻转图片 ${path} 时发生错误`, error.message);
-        return false;
-    });
+    })
+        .then(() => generateXML(outputPath))
+        .catch((error: Error): boolean => {
+            logError(`沿对角线翻转图片 ${path} 时发生错误`, error.message);
+            return false;
+        });
 }
 
 /**
@@ -154,7 +181,9 @@ export function adjustBrightness(input: ImageInput, brightness: number): Promise
         gm(path)
             .modulate(brightness, 100, 100)
             .write(outputPath, handle(resolve, reject));
-    }).catch(() => false);
+    })
+        .then(() => generateXML(outputPath))
+        .catch(() => false);
 }
 
 /**
@@ -170,7 +199,9 @@ export function adjustContrast(input: ImageInput, multiplier: number): Promise<a
         gm(path)
             .contrast(multiplier)
             .write(outputPath, handle(resolve, reject));
-    }).catch(() => false);
+    })
+        .then(() => generateXML(outputPath))
+        .catch(() => false);
 }
 
 /**
@@ -186,7 +217,9 @@ export function adjustHue(input: ImageInput, hue: number): Promise<any> {
         gm(path)
             .modulate(100, 100, hue)
             .write(outputPath, handle(resolve, reject));
-    }).catch(() => false);
+    })
+        .then(() => generateXML(outputPath))
+        .catch(() => false);
 }
 
 /**
@@ -202,7 +235,9 @@ export function adjustSaturation(input: ImageInput, saturation: number): Promise
         gm(path)
             .modulate(100, saturation, 100)
             .write(outputPath, handle(resolve, reject));
-    }).catch(() => false);
+    })
+        .then(() => generateXML(outputPath))
+        .catch(() => false);
 }
 
 /**
@@ -295,9 +330,10 @@ export function processByContrast(input: ImageInput): Promise<any> {
  */
 export function processImage(input: ImageInput): Promise<boolean> {
     return Promise.all([
-        flip(input),
-        flop(input),
-        flipAndFlop(input),
+        // 暂时去掉翻转，因为感觉翻转后和原来组件差别很大
+        // flip(input),
+        // flop(input),
+        // flipAndFlop(input),
         processByBrightness(input),
         processBySaturation(input),
         processByHue(input),
