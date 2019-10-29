@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://git.code.oa.com/erwinliu/lego-ai-image-creator.git"
+    "url": "https://github.com/vabaly/ai-image-creator.git"
   },
   "bin": {
     "aiimg": "lib/command.js"
   },
   "author": "vabaly",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
     "image",
     "lego",
