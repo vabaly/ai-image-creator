@@ -11,10 +11,12 @@
       "runtimeArgs": ["-r", "ts-node/register"],
       "args": [
         "${workspaceFolder}/src/command.ts",
-        "--ignore",
-        "temp/,a.png,a",
+        // "--ignore",
+        // "temp/,a.png,a",
         "--input",
-        "temp/demo.png"
+        "temp/input/demo.png",
+        "--output",
+        "temp/output"
       ]
     }
   ]
