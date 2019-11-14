@@ -237,10 +237,7 @@ async function composite(inputPath: string, outputPath: string): Promise<Compone
                     ymin: y,
                     ymax
                 },
-                size: {
-                    width: componentWidth,
-                    height: componentHeight
-                }
+                size: backgroundSize
             };
         });
 }
