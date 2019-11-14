@@ -34,6 +34,27 @@ export interface ProcessFn {
 }
 
 /**
+ * 判断是否是 GM 可以处理的图片文件
+ * @param filePath 图片文件路径
+ */
+function isCanProcessImage(filePath: string): Promise<boolean> {
+    return new Promise((resolve): void => {
+        try {
+            gm(filePath)
+                .format((error): void => {
+                    if (error) {
+                        resolve(false);
+                    } else {
+                        resolve(true);
+                    }
+                });
+        } catch (error) {
+            resolve(false);
+        }
+    });
+}
+
+/**
  * 获取图像输出的地址
  * @param output 图像输出数据
  */
@@ -54,12 +75,25 @@ function getOutputPath(output: Output): string {
 /**
  * 随机获取背景
  */
-function getBackgroundRandom(): string {
-    const backgroundDir = path.join(__dirname, './assets/background');
+async function getBackgroundRandom(): Promise<string> {
+    const backgroundDir = path.join(__dirname, '../assets/background');
     const backgroundFileList = fs.readdirSync(backgroundDir);
-    const length = backgroundFileList.length;
+    const validBackgroundFileList = [];
+
+    // 只有能被处理的图片才能加入备选池
+    for (let index = 0; index < backgroundFileList.length; index++) {
+        const filename = backgroundFileList[index];
+        const filePath = path.resolve(backgroundDir, filename);
+        const isValidFile = await isCanProcessImage(filePath);
+
+        if (isValidFile) {
+            validBackgroundFileList.push(filename);
+        }
+    }
+
+    const length = validBackgroundFileList.length;
     const index = Math.floor(Math.random() * length);
-    const filename = backgroundFileList[index];
+    const filename = validBackgroundFileList[index];
     const filePath = path.resolve(backgroundDir, filename);
 
     return filePath;
@@ -144,7 +178,7 @@ async function composite(inputPath: string, outputPath: string): Promise<Compone
     let componentPath = inputPath;
 
     // 随机选取一张背景图
-    const backgroundPath = getBackgroundRandom();
+    const backgroundPath = await getBackgroundRandom();
     // 获取背景图的尺寸
     const backgroundSize = await getSize(backgroundPath);
     // 获取组件的尺寸

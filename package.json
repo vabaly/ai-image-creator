@@ -1,6 +1,6 @@
 {
   "name": "ai-image-creator",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "扩充图片库至40+倍的工具，常用于扩充对象识别的训练集",
   "main": "lib/index.js",
   "scripts": {
